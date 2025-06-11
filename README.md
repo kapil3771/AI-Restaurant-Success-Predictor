@@ -36,6 +36,17 @@ AI-Restaurant-Predictor/
 
 ## 🛠 Setup Instructions
 
+## 📥 Download Dataset
+
+Due to GitHub file size limits, the dataset is not included in the repo.
+
+To download:
+
+```bash
+bash dataset_download.sh
+This will fetch zomato-eda.zip from Kaggle and save it to ~/Downloads.
+➡️ Unzip it and copy zomato.csv into the project root before running the app.
+
 1️⃣ **Clone the repo**
 
 ```bash
