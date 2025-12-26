@@ -1,117 +1,117 @@
 # 🍽️ AI-Powered Restaurant Success Predictor
 
-This is an end-to-end **Data Science & Machine Learning** project that predicts whether a restaurant will be successful or not and also estimates using its expected rating using both classification and regression models.
+A production-ready **Machine Learning application** that predicts whether a restaurant is likely to succeed and estimates the approximate cost for two, based on location, cuisine, restaurant type, and user engagement data.
+
+This project is **Dockerized** for easy execution on any machine without local Python or dependency setup.
+
+---
+
+## 🚀 Run with Docker (Recommended)
+
+The easiest and recommended way to use this project is via Docker.
+
+### Prerequisite
+- Docker installed
+
+### Run
+```bash
+docker pull kapil9123/restaurant-predictor:1.0.0
+
+docker run -d \
+  -p 8501:8501 \
+  --name restaurant_app \
+  kapil9123/restaurant-predictor:1.0.0
+```
+
+Open in browser:
+http://localhost:8501
+
+### Stop
+```bash
+docker stop restaurant_app
+docker rm restaurant_app
+```
 
 ---
 
 ## ✨ Features
 
-* ✅ Cleaned and preprocessed real-world dataset (Zomato)
-* ✅ Exploratory Data Analysis (EDA) with visualizations
-* ✅ Feature Engineering & Encoding
-* ✅ Model Building:
-
-  * Classification (Success/Failure)
-  * Regression (Rating Prediction)
-* ✅ Model Evaluation (Accuracy, Confusion Matrix, MAE, RMSE)
-* ✅ Trained and saved models as `.pkl` files
-* ✅ `app.py` Streamlit app to load and predict locally
-
----
-
-## 📁 Project Structure
-
-```
-AI-Restaurant-Predictor/
-├── app.py                     # Streamlit app to run predictions
-├── rf_classifier.pkl          # Trained classifier model (Random Forest)
-├── rf_regressor.pkl           # Trained regression model (Random Forest)
-├── zomato.csv                 # Dataset used
-├── requirements.txt           # Cleaned dependencies
-├── LICENSE                    # MIT License
-└── README.md                  # This file
-```
-
----
-
-## 🛠 Setup Instructions
-
-## 📥 Download Dataset
-
-Due to GitHub file size limits, the dataset is not included in the repo.
-
-To download:
-
-```bash
-bash dataset_download.sh
-This will fetch zomato-eda.zip from Kaggle and save it to ~/Downloads.
-➡️ Unzip it and copy zomato.csv into the project root before running the app.
-
-1️⃣ **Clone the repo**
-
-```bash
-git clone https://github.com/<your-username>/AI-Restaurant-Predictor.git
-cd AI-Restaurant-Predictor
-```
-
-2️⃣ **Create virtual environment**
-
-```bash
-python3 -m venv ml_env
-source ml_env/bin/activate  # or .\ml_env\Scripts\activate on Windows
-```
-
-3️⃣ **Install dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-4️⃣ **Run the app**
-
-```bash
-streamlit run app.py
-```
-
----
-
-## 📊 Dataset Info
-
-* Source: Zomato Restaurant Dataset
-* Includes features like:
-
-  * Online Order, Book Table, Location, Cuisines, Votes, Rating, etc.
+- Real-world restaurant data (Zomato)
+- Feature engineering & encoding
+- Machine Learning models:
+  - Classification (Success / Failure)
+  - Regression (Cost estimation)
+- Interactive Streamlit UI
+- Visual analytics using Plotly & Altair
+- Fully containerized & portable
 
 ---
 
 ## 🧠 Machine Learning Models
 
-* ✅ **Classification:**
+- Classifier: RandomForestClassifier  
+  Predicts whether a restaurant is likely to succeed
 
-  * Model: RandomForestClassifier
-  * Target: Whether restaurant is successful (rating > 3.5)
-* ✅ **Regression:**
+- Regressor: RandomForestRegressor  
+  Estimates approximate cost for two people
 
-  * Model: RandomForestRegressor
-  * Target: Predict the exact rating
+---
+
+## 📦 Project Structure (GitHub)
+
+```
+AI-Restaurant-Success-Predictor/
+├── app.py
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── run.sh
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+Trained ML models and datasets are **not stored in this repository** due to size constraints.  
+They are bundled securely inside the Docker image.
+
+---
+
+## ⚠️ Why Models & Dataset Are Not in GitHub
+
+- GitHub has file size limits
+- ML artifacts are runtime assets, not source code
+- Docker image is the deployable artifact
+
+---
+
+## 🛠 Local Development (Optional)
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Requires Python 3.10+ and trained models.
 
 ---
 
 ## ⚖ License
 
-This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
 ## 👤 Author
 
-**Kapil Pravin Marathe**
-GitHub: [kapil3771](https://github.com/kapil3771)
+Kapil Pravin Marathe  
+GitHub: https://github.com/kapil3771
 
 ---
 
 ## 🙏 Credits
 
-* Zomato Dataset Source
-* Scikit-learn, Pandas, Matplotlib, Seaborn
-* Streamlit / CLI Python
+Zomato Dataset  
+Scikit-learn  
+Pandas & NumPy  
+Streamlit  
+Plotly & Altair

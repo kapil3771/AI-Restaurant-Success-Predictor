@@ -1,0 +1,13 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+*.ipynb
+.ipynb_checkpoints/
+ml_env/
+.DS_Store
+zomato.csv
+*.zip
+*.pdf
+dataset_download.sh
+run.sh

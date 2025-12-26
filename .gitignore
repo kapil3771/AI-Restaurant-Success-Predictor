@@ -1,9 +1,21 @@
+# Python
 __pycache__/
 *.pyc
 *.pkl
-*.ipynb_checkpoints
-.env
-ml_env/
-.DS_Store
-zomato.csv
+
+# Data
+*.csv
 *.zip
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual env
+ml_env/
+.venv/
+
+# OS
+.DS_Store
+
+# Docker
+*.tar
