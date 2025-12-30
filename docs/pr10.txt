@@ -1,0 +1,65 @@
+Started by user Kapil Pravin Marathe
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /Users/apple/.jenkins/workspace/ai-restaurant-cicd
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Source Code)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /Users/apple/.jenkins/workspace/ai-restaurant-cicd/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/kapil3771/AI-Restaurant-Success-Predictor.git # timeout=10
+Fetching upstream changes from https://github.com/kapil3771/AI-Restaurant-Success-Predictor.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5 (Apple Git-154)'
+ > git fetch --tags --force --progress -- https://github.com/kapil3771/AI-Restaurant-Success-Predictor.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 318fbc9e46e5e629761b01de73c2ed81db3d3181 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 318fbc9e46e5e629761b01de73c2ed81db3d3181 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 318fbc9e46e5e629761b01de73c2ed81db3d3181 # timeout=10
+Commit message: "Fix CI/CD pipeline: deploy Docker image to Kubernetes via Jenkins"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Pull Docker Image)
+[Pipeline] sh
++ docker pull kapil9123/restaurant-predictor:1.0.0
+1.0.0: Pulling from kapil9123/restaurant-predictor
+Digest: sha256:86dd638f4c338ddf696bdfc20271cf6b05a0f37d72c96e3adfa61ffe7ea12724
+Status: Image is up to date for kapil9123/restaurant-predictor:1.0.0
+docker.io/kapil9123/restaurant-predictor:1.0.0
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Kubernetes)
+[Pipeline] sh
++ kubectl apply -f k8s/
+deployment.apps/restaurant-app unchanged
+horizontalpodautoscaler.autoscaling/restaurant-app-hpa unchanged
+service/restaurant-service unchanged
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify Deployment)
+[Pipeline] sh
++ kubectl rollout status deployment/restaurant-app
+deployment "restaurant-app" successfully rolled out
++ kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+restaurant-app-59cc6bf79-2kqs5   1/1     Running   0          7m47s
++ kubectl get services
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes           ClusterIP   10.96.0.1      <none>        443/TCP          2d19h
+restaurant-service   NodePort    10.98.85.221   <none>        8501:30001/TCP   7m47s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
