@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant-app
+  labels:
+    app: restaurant
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  selector:
+    matchLabels:
+      app: restaurant
+
+  template:
+    metadata:
+      labels:
+        app: restaurant
+    spec:
+      containers:
+      - name: restaurant-container
+        image: kapil9123/restaurant-predictor:1.0.0
+        ports:
+        - containerPort: 8501
+
+        #  Resource management (MANDATORY for ML)
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+
+        #  Liveness Probe (restart if stuck)
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        #  Readiness Probe (traffic only when ready)
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 20
+          periodSeconds: 5
