@@ -2,19 +2,32 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Checkout Source Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/kapil3771/AI-Restaurant-Success-Predictor.git'
+            }
+        }
+
         stage('Pull Docker Image') {
             steps {
                 sh 'docker pull kapil9123/restaurant-predictor:1.0.0'
             }
         }
 
-        stage('Run Container Smoke Test') {
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f k8s/'
+            }
+        }
+
+        stage('Verify Deployment') {
             steps {
                 sh '''
-                docker run -d -p 8501:8501 --name test_app kapil9123/restaurant-predictor:1.0.0
-                sleep 15
-                docker ps | grep test_app
-                docker rm -f test_app
+                kubectl rollout status deployment/restaurant-app
+                kubectl get pods
+                kubectl get services
                 '''
             }
         }
